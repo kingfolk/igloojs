@@ -1,3 +1,5 @@
+***Forked from https://github.com/skeeto/igloojs. For personal project use. Unstable.***
+
 # Igloo WebGL
 
 Igloo is a minimal, fluent, object-oriented wrapper API for WebGL. The
@@ -44,6 +46,11 @@ Demo.prototype.draw = function() {
 This example (shader code not shown) would display a scaled, tinted
 image on the screen. No other WebGL calls are required to make this
 work.
+
+## Why fork?
+1. make a npm package.
+2. fix some bugs.
+3. add WEBGL_draw_buffers extension support.
 
 ## Documentation
 

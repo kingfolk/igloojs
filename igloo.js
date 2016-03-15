@@ -1,5 +1,5 @@
 /**
- * @version 0.1.2
+ * @version 0.1.3
  */
 
 /**
@@ -215,14 +215,15 @@ Igloo.Program.prototype.use = function() {
  * @param {boolean} [i] if true use the integer version
  * @returns {Igloo.Program} this
  */
-Igloo.Program.prototype.uniform = function(name, value, i) {
+Igloo.Program.prototype.uniform = function(name, value, i, dim) {
     if (value == null) {
         this.vars[name] = this.gl.getUniformLocation(this.program, name);
     } else {
         if (this.vars[name] == null) this.uniform(name);
         var v = this.vars[name];
         if (Igloo.isArray(value)) {
-            var method = 'uniform' + value.length + (i ? 'i' : 'f') + 'v';
+            var l = dim ? dim : value.length;
+            var method = 'uniform' + l + (i ? 'i' : 'f') + 'v';
             this.gl[method](v, value);
         } else if (typeof value === 'number' || typeof value === 'boolean') {
             if (i) {
@@ -300,6 +301,7 @@ Igloo.Program.prototype.draw = function(mode, count, type) {
     }
     return this;
 };
+
 
 /**
  * Disables all attribs from this program.
@@ -527,6 +529,33 @@ Igloo.Framebuffer.prototype.attach = function(texture) {
 };
 
 /**
+ * @param {Igloo.Texture} array of textures
+ * @returns {Igloo.Framebuffer}
+ */
+Igloo.Framebuffer.prototype.attachArr = function(textures) {
+    var gl = this.gl;
+    var ext = gl.getExtension('WEBGL_draw_buffers');
+    var attachIdx = 0;
+    var arr = [];
+
+    this.bind();
+    textures.forEach((texture) => {
+      var attachIdxStr = 'COLOR_ATTACHMENT' + attachIdx +'_WEBGL';
+      attachIdx += 1;
+      arr.push(ext[attachIdxStr]);
+      gl.framebufferTexture2D(gl.FRAMEBUFFER, ext[attachIdxStr],
+                              gl.TEXTURE_2D, texture.texture, 0);
+    });
+
+    console.log('attachArr');
+    console.log(arr);
+    ext.drawBuffersWEBGL(arr);
+
+    return this;
+};
+
+
+/**
  * Attach a renderbuffer as a depth buffer for depth-tested rendering.
  * @param {number} width
  * @param {number} height
@@ -544,3 +573,5 @@ Igloo.Framebuffer.prototype.attachDepth = function(width, height) {
     }
     return this;
 };
+
+export default Igloo;

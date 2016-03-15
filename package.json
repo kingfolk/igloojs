@@ -1,0 +1,25 @@
+{
+  "name": "igloo-ext",
+  "version": "0.1.3",
+  "description": "a minimal, fluent, object-oriented wrapper API for WebGL. forked from https://github.com/skeeto/igloojs",
+  "main": "igloo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kingfolk/igloojs.git"
+  },
+  "keywords": [
+    "webgl",
+    "WEBGL_draw_buffers",
+    "glsl",
+    "shader"
+  ],
+  "author": "kingfolk <jjlfolk@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kingfolk/igloojs/issues"
+  },
+  "homepage": "https://github.com/kingfolk/igloojs#readme"
+}
