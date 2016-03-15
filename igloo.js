@@ -1,8 +1,4 @@
 /**
- * @version 0.1.4
- */
-
-/**
  * Wrap WebGLRenderingContext objects with useful behavior.
  * @param {WebGLRenderingContext|HTMLCanvasElement} gl
  * @param {Object} [options] to pass to getContext()
@@ -574,4 +570,4 @@ Igloo.Framebuffer.prototype.attachDepth = function(width, height) {
     return this;
 };
 
-export default Igloo;
+module.exports = Igloo;
