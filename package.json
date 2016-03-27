@@ -1,6 +1,6 @@
 {
   "name": "igloo-ext",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "a minimal, fluent, object-oriented wrapper API for WebGL. forked from https://github.com/skeeto/igloojs",
   "main": "igloo.js",
   "scripts": {

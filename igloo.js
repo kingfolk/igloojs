@@ -136,12 +136,18 @@ Igloo.prototype.elements = function(data, usage) {
  * @param {GLenum} [wrap=GL_CLAMP_TO_EDGE]
  * @param {GLenum} [filter=GL_LINEAR]
  * @param {GLenum} [type=UNSIGNED_BYTE]
+ * @param {Object} [options = {type: 'ArrayBufferView', width, height} || {}]
  * @returns {Igloo.Texture}
  */
-Igloo.prototype.texture = function(source, format, wrap, filter, type) {
+Igloo.prototype.texture = function(source, format, wrap, filter, type, options) {
     var texture = new Igloo.Texture(this.gl, format, wrap, filter, type);
     if (source != null) {
-        texture.set(source);
+        if (options && options.type === 'ArrayBufferView') {
+          texture.set(source, options.width, options.height);
+        }
+        else {
+          texture.set(source);
+        }
     }
     return texture;
 };
@@ -535,7 +541,7 @@ Igloo.Framebuffer.prototype.attachArr = function(textures) {
     var arr = [];
 
     this.bind();
-    textures.forEach((texture) => {
+    textures.forEach(function(texture) {
       var attachIdxStr = 'COLOR_ATTACHMENT' + attachIdx +'_WEBGL';
       attachIdx += 1;
       arr.push(ext[attachIdxStr]);
